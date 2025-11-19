@@ -490,6 +490,7 @@
                                 <div id="moveConfirmBubble" class="move-confirm-bubble" style="display:none;">
                                     <div id="moveConfirmText">Are you sure?</div>
                                     <div class="d-flex justify-content-end gap-2 mt-2">
+                                        <button class="btn btn-success btn-sm" onclick="executeMove()">Confirm</button>
                                         <button class="btn btn-secondary btn-sm" onclick="cancelMoveConfirm()">Cancel</button>
                                     </div>
                                 </div>
@@ -1160,8 +1161,8 @@ function confirmMove() {
 
     // Change Move button → Confirm Move
     const moveBtn = document.querySelector('#applicationComparisonSection .btn-success');
-    moveBtn.textContent = "Confirm Move";
-    moveBtn.onclick = executeMove;  // next click actually moves
+    // moveBtn.textContent = "Confirm Move";
+    // moveBtn.onclick = executeMove;  // next click actually moves
 }
 
 function executeMove() {
