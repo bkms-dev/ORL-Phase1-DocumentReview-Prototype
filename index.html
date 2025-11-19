@@ -371,15 +371,22 @@
             </div>
 
             <div class="mb-3" id="funderNotesContainer" style="display: none;">
-                <label class="form-label" style="font-weight: bold; margin-bottom: 8px;">Funder Note</label>
+                <label class="form-label" style="font-weight: bold; margin-bottom: 8px;">Funder Note<sup><i id="funderAsterisk" style="font-size: 7px; display: none;" class="bi bi-asterisk text-danger"></i></sup></label>
                 <textarea class="form-control" rows="3" placeholder="Add a note to funder" style="background:#f8f9fa;" id="funderNotesTextarea"></textarea>
             </div>
 
             <div class="mb-3" id="customerNotesContainer" style="display: none;">
-                <label class="form-label" style="font-weight: bold; margin-bottom: 8px;">Customer Note</label>
+                <label class="form-label" style="font-weight: bold; margin-bottom: 8px;">Customer Note<sup><i id="customerAsterisk" style="font-size: 7px; display: none;" class="bi bi-asterisk text-danger"></i></sup></label>
                 <textarea class="form-control" rows="3" placeholder="Add a note to customer" style="background:#f8f9fa;" id="customerNotesTextarea"></textarea>
             </div>
 
+            <div id="requestCheckbox" class="mb-3 gap-2" style="display: none;">
+                <input class="form-check-input" type="checkbox" id="resubmitCheckbox">
+                <label class="form-check-label" for="resubmitCheckbox">
+                    Request Customer to Resubmit Document
+                </label>
+            </div>
+            
             <div class="text-muted mb-3 text-end">Next document will load automatically after your decision.</div>
 
             <div class="action-btns d-flex gap-3 justify-content-end">
@@ -850,11 +857,17 @@ function handleReject() {
   const rejectionContainer = document.getElementById('rejectionReasonContainer');
   const funderNotesContainer = document.getElementById('funderNotesContainer');
   const customerNotesContainer = document.getElementById('customerNotesContainer');
+  const checkbox = document.getElementById('requestCheckbox');
+  const funderAsterisk = document.getElementById('funderAsterisk');
+  const customerAsterisk = document.getElementById('customerAsterisk');
   
   // Show the rejection reason dropdown and both notes containers
   rejectionContainer.style.display = 'block';
   funderNotesContainer.style.display = 'block';
   customerNotesContainer.style.display = 'block';
+  checkbox.style.display = 'block';
+  funderAsterisk.style.display = 'inline';
+  customerAsterisk.style.display = 'inline';
   
   // Focus on the dropdown for better UX
   const rejectionSelect = document.getElementById('rejectionReasonSelect');
@@ -1236,10 +1249,16 @@ function resetRejectForm() {
   const rejectionContainer = document.getElementById('rejectionReasonContainer');
   const funderNotesContainer = document.getElementById('funderNotesContainer');
   const customerNotesContainer = document.getElementById('customerNotesContainer');
+  const checkbox = document.getElementById('requestCheckbox');
+  const funderAsterisk = document.getElementById('funderAsterisk');
+  const customerAsterisk = document.getElementById('customerAsterisk');
   
   rejectionContainer.style.display = 'none';
   funderNotesContainer.style.display = 'none';
   customerNotesContainer.style.display = 'none';
+  checkbox.style.display = 'none';
+  funderAsterisk.style.display = 'none';
+  customerAsterisk.style.display = 'none';
   
   // Reset dropdown selection
   const rejectionSelect = document.getElementById('rejectionReasonSelect');
