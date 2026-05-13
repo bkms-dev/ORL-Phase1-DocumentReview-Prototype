@@ -229,13 +229,139 @@
     filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.2));
 }
 
+.page-toggle .btn-group {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.toggle-btn {
+    padding: 8px 18px;
+    border: none;
+    background: #f4f4f4;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.toggle-btn.active {
+    background: #333;
+    color: #fff;
+    font-weight: 600;
+}
+
+.toggle-btn:hover {
+    background: #e0e0e0;
+}
+
+.applicant-header {
+    background: #6f6f6f;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.applicant-header .right {
+    text-align: right;
+}
+
+.applicant-table {
+    font-size: 13px;
+    border: 1px solid #ccc;
+    overflow: hidden; /* important */
+    margin: 20px;
+}
+
+.applicant-table .row {
+    display: grid;
+    grid-template-columns: 180px 1fr 200px 1fr;
+    padding: 6px 12px;   /* consistent inner spacing */
+}
+
+.applicant-table .row.alt {
+    background: #dcdcdc; /* slightly tighter gray like screenshot */
+}
+
+.applicant-table .cell.label {
+    font-weight: bold;
+    color: #333;
+}
+
+.applicant-table .cell.value {
+    color: #222;
+}
+
+.applicant-table .cell.value.red {
+    color: #c40000;
+}
+
+.applicant-links {
+    margin-top: 10px;
+    padding-top: 8px;
+    font-size: 12px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px; /* vertical + horizontal spacing */
+}
+
+.applicant-links a {
+    color: #333;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.applicant-links a:hover {
+    color: #000;
+}
+
+.applicant-wrapper {
+    margin: 0 -20px; /* NEGATE parent padding */
+}
+
+.mismatch-link {
+    color: #c40000;
+    cursor: pointer;
+    margin-left: 6px;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.mismatch-link:hover {
+    color: #900;
+}
 
 
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
+    <!-- Top Toggle Buttons -->
+    <div class="page-toggle d-flex justify-content-center mb-3">
+        <div class="btn-group" role="group">
+            <button id="docReviewBtn" class="toggle-btn active" onclick="switchPage('document')">
+                Document Review Page
+            </button>
+            <button id="applicantBtn" class="toggle-btn" onclick="switchPage('applicant')">
+                Applicant Page
+            </button>
+        </div>
+    </div>
 <div class="review-container container" style="max-width:1400px; min-height:700px;">
+    
+
+    <div id="documentPage">
+
+
     <div class="mb-4"><strong>Document Review</strong><br>Application #123456789 · Borrower: John Doe</div>
 
     <div class="tabs">
@@ -309,11 +435,11 @@
                     <!-- Year to Date Earnings Field -->
                    <div class="mb-3 p-3" style="background:#f8f9fa; border: 1px solid #ddd; border-radius: 6px; height: 80px; display: flex; flex-direction: column; justify-content: space-between;">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span style="color:#666; font-size:13px;">Year to Date Earnings</span>
+                            <span style="color:#666; font-size:13px;">Gross Monthly Income</span>
                             <span class="badge badge-mismatch" style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; font-size: 11px;">Mis-Match</span>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div style="font-weight: bold; font-size: 15px; color: #333;">18,884.91</div>
+                            <div style="font-weight: bold; font-size: 15px; color: #333;">4,540.54</div>
                             <div style="color: #999; font-size: 12px;">90%</div>
                         </div>
                     </div>
@@ -341,9 +467,9 @@
                     <!-- Year to Date Earnings Field -->
                     <div class="mb-3 p-3" style="background:#f8f9fa; border: 1px solid #ddd; border-radius: 6px; height: 80px; display: flex; flex-direction: column; justify-content: center;">
                         <div class="mb-2">
-                            <span style="color:#666; font-size:13px;">Year to Date Earnings</span>
+                            <span style="color:#666; font-size:13px;">Gross Monthly Income</span>
                         </div>
-                        <div style="font-weight: bold; font-size: 15px; color: #333;">17,800.74</div>
+                        <div style="font-weight: bold; font-size: 15px; color: #333;">4,000</div>
                     </div>
                 </div>
             </div>
@@ -854,7 +980,175 @@
         </div>
     </div>
     </div>
+    </div>
 
+    <div id="applicantPage" style="display:none;">
+    <!-- Your applicant layout from image goes here -->
+
+    <div class="applicant-container">
+
+    <!-- Header Bar -->
+    <div class="applicant-header">
+        <div class="left">
+            <strong>5823174 - DANIEL, JACINTO</strong><br>
+            <span>Refi, Individual, Not Verified</span>
+        </div>
+        <div class="right">
+            <span>Approval Exp:06/11/2026</span>
+            <span>App Exp:07/16/2026</span><br>
+            <strong>PENDING FUNDING</strong>
+        </div>
+    </div>
+
+    <div class="applicant-wrapper">
+    <!-- Info Grid -->
+    <div class="applicant-table">
+
+        <div class="row">
+            <div class="cell label">Last Name:</div>
+            <div class="cell value">Daniel</div>
+
+            <div class="cell label">Address:</div>
+            <div class="cell value">7171 Schaefer Springs</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">First Name:</div>
+            <div class="cell value">Jacinto</div>
+
+            <div class="cell label">City, State & Zip:</div>
+            <div class="cell value red">
+                XENIA, IL 62899 (city/state mismatch) (County: Clay)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">DOB:</div>
+            <div class="cell value">11/14/2005 (currently 20 yrs. old)</div>
+
+            <div class="cell label">Housing Payment:</div>
+            <div class="cell value">$2,131.00</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">SSN:</div>
+            <div class="cell value red">871-74-5231 (bureau/app mismatch)</div>
+
+            <div class="cell label">Time At Residence:</div>
+            <div class="cell value">years: 1, months:1</div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">Email:</div>
+            <div class="cell value">openroad-283969525@kikoff.com</div>
+
+            <div class="cell label">Time At Job:</div>
+            <div class="cell value">years: 1, months:5</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">Home Phone:</div>
+            <div class="cell value">(110) 440-0544</div>
+
+            <div class="cell label">Residence Type:</div>
+            <div class="cell value">Other</div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">Work Phone:</div>
+            <div class="cell value">(110) 440-0544</div>
+
+            <div class="cell label">Employer Name:</div>
+            <div class="cell value">Medhurst-Fisher (EMPLOYED)</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">Cell Phone:</div>
+            <div class="cell value">(110) 440-0544</div>
+
+            <div class="cell label">Gross Monthly Income:</div>
+            <div class="cell value">
+                $4,000.00 
+                <span class="mismatch-link" onclick="openDocument()">
+                    (Mismatch - 4,540.54)
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">Preferred Contact Method:</div>
+            <div class="cell value"></div>
+
+            <div class="cell label">Other Income:</div>
+            <div class="cell value">$0.00 (Other)</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">Occupation:</div>
+            <div class="cell value">Global Coordinator</div>
+
+            <div class="cell label">Spanish Speaker:</div>
+            <div class="cell value">No</div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">IP Address:</div>
+            <div class="cell value">60.219.91.174</div>
+
+            <div class="cell label">Application Date:</div>
+            <div class="cell value">05/12/2026 12:17:35PM</div>
+        </div>
+
+        <div class="row alt">
+            <div class="cell label">Work Verification #:</div>
+            <div class="cell value"></div>
+
+            <div class="cell label">Customer ID:</div>
+            <div class="cell value">ee25601c-687e-47c6-be56-e535958c94ad</div>
+        </div>
+
+        <div class="row">
+            <div class="cell label">Source:</div>
+            <div class="cell value">Test KikOff</div>
+
+            <div class="cell label"></div>
+            <div class="cell value"></div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Bottom Links -->
+    <div class="applicant-links">
+    <a href="#">Notes</a>
+    <a href="#">Decision History</a>
+    <a href="#">Decision Logic</a>
+    <a href="#">Applicant</a>
+    <a href="#">CoApplicant</a>
+    <a href="#">Email</a>
+    <a href="#">Text</a>
+    <a href="#">Docs</a>
+    <a href="#">Upload</a>
+    <a href="#">Verify User</a>
+    <a href="#">Stip Flag</a>
+    <a href="#">Savings</a>
+    <a href="#">LCA Verification</a>
+    <a href="#">SentDocs Verification</a>
+    <a href="#">Rules</a>
+    <a href="#">Canned Notes</a>
+    <a href="#">Credit Exception</a>
+    <a href="#">LCA Scripts</a>
+    <a href="#">Assignments</a>
+    <a href="#">WhitePages</a>
+    <a href="#">Accounting Requests</a>
+    <a href="#">HelpDesk</a>
+    <a href="#">Usury Calculator</a>
+    <a href="#">VSC/LTV Calculator</a>
+    <a href="#">Titles Requests</a>
+</div>
+
+</div>
+</div>
 </div>
 
 <!-- Notes Modal - Remove entirely -->
@@ -1520,6 +1814,36 @@ function toggleNoteRow(link, section) {
         noteContent.style.transform = 'translateY(-10px)';
         setTimeout(() => noteRow.style.display = 'none', 200);
     }
+}
+
+function switchPage(page) {
+    const docPage = document.getElementById('documentPage');
+    const appPage = document.getElementById('applicantPage');
+
+    const docBtn = document.getElementById('docReviewBtn');
+    const appBtn = document.getElementById('applicantBtn');
+
+    if (page === 'document') {
+        docPage.style.display = 'block';
+        appPage.style.display = 'none';
+
+        docBtn.classList.add('active');
+        appBtn.classList.remove('active');
+    } else {
+        docPage.style.display = 'none';
+        appPage.style.display = 'block';
+
+        appBtn.classList.add('active');
+        docBtn.classList.remove('active');
+    }
+}
+
+function openDocument() {
+    window.open(
+        "https://dev4.openroadlending.com/Document/ViewDocument?filepath=6vSqt%2BAqO7RQPiwSLPlOqZO%2BT5LxaQItAtMgnuUksSRm4RJmF2gX3k8xxRzOKsrEO0bFsJKhwwzP6qN53nb7h5EIC8HCKaNBbUrv7sY3%2FeeBMPuclnhkusc4TGobdXxbCEoE5C1AlBj1PAvdm8rJJvBmmgyDSmFaR0ByJFbIuRxH9nNOsKeut8YNjfHBBfcZPzP5XuVbypRg4Z6V8%2BZRsA%3D%3D",
+        "DocumentWindow",
+        "width=1000,height=700,top=100,left=200,resizable=yes,scrollbars=yes"
+    );
 }
 
 </script>
